@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{listTask.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Nuevo item</ion-label>
+      <ion-input type="text" [(ngModel)]="nameTask" (keyup.enter)="addTask()"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+
+    <ion-list-header>
+      <ion-label>Tareas por hacer</ion-label>
+    </ion-list-header>
+
+    <ion-item-sliding *ngFor="let task of listTask.tasks; let i = index" class="animated fadeInDown">
+      <ion-item>
+        <ion-label>{{task.description}} </ion-label>
+        <ion-checkbox slot="start" [(ngModel)]="task.complete" (ionChange)="changeTask(task)"></ion-checkbox>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="delete(i)">
+          <ion-icon name="close" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
